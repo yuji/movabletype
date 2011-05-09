@@ -1701,6 +1701,29 @@ sub search_by_meta {
         @{ $class->lookup_multi( [ map { $get_pk->($_) } @metaobjs ] ) };
 }
 
+sub deflate {
+    my $self = shift;
+    my $data = $self->SUPER::deflate(@_);
+
+    if ( $self->has_meta ) {
+        $data->{meta} = $self->{__meta}->deflate;
+    }
+
+    $data;
+}
+
+sub inflate {
+    my $class      = shift;
+    my ($deflated) = @_;
+    my $obj        = $class->SUPER::inflate(@_);
+
+    if ( $class->has_meta && $deflated->{meta} ) {
+        $obj->{__meta}->inflate( $deflated->{meta} );
+    }
+
+    $obj;
+}
+
 package MT::Object::Meta;
 
 use base qw( Data::ObjectDriver::BaseObject );
