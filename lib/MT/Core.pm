@@ -1733,6 +1733,7 @@ BEGIN {
             'SearchAltTemplate'        => { alias   => 'AltTemplate' },
             'SearchPrivateTags'        => { default => 0 },
             'DeepCopyRecursiveLimit'   => { default => 2 },
+            'BulkLoadMetaObjectsLimit' => { default => 100 },
             'DisableMetaObjectCache'   => { default => 1, },
             'RegKeyURL' =>
                 { default => 'http://www.typekey.com/extras/regkeys.txt', },
